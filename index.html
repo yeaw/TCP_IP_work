@@ -1,40 +1,27 @@
 
-
 <!DOCTYPE html PUBLIC >
 <html>
 <head>
 	<title>Packet Hexdump Decoder</title>
 	<link rel="stylesheet" href="style/style.css" />
-</head>
-<body>
-	<div id="container">
-
-        <h1 id="head"><a href="">Packet Hexdump Decoder</a></h1>
-        <h2 id="subhead2">
-        	By Sutthikeiat Bamrungthai Putipong Kongkaew Sunantawat Phrommak Chaiwud Taitanee
-        </h2>
-        <div id="content">
-        		
-				
-        		<form action=" " method="post">
-					
-					<div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='' /></div>
-					Enter your packet hexdump: <i style="color:#999;font-size:12px;">(e.g. A0 F2 01 00 8F 25 66 F1)</i><br/>
-					<textarea name="packet" class="packettext"></textarea><br/>
-					<input type="submit" value="Decode" /> 
-					
-				</form>			
-				<div>
-				</div>
-				
-		
-    </div>	
 	<script type="text/javascript" src="js/jquery-2.1.4.min"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 	<script type="text/javascript">
-	
-
 	</script>
-	
+</head>
+<body>
+	<div>
+        <h1>Packet Hexdump Decoder</h1>
+        <h2>
+        	By Sutthikeiat Bamrungthai Putipong Kongkaew Sunantawat Phrommak Chaiwud Taitanee
+        </h2>
+        <div>
+        	<form action=" " method="post">
+        		Enter your packet hexdump: <i style="color:#999;font-size:12px;">(e.g. A0 F2 01 00 8F 25 66 F1)</i><br/>
+        		<textarea name="packet" class="packettext">00 24 8C 01 79 08 00 24 8C 01 79 06 08 00 45 20 00 3C 16 DB 00 00 3F 06 CC 8A D5 E9 AB 0A 5E B6 B8 8C 05 57 90 1F 90 30 93 71 75 F5 DB BA A0 12 16 28 EF E6 00 00 02 04 05 96 04 02 08 0A 59 70 9A 08 2D DE 7D 72 01 03 03 06</textarea><br/>
+        		<input type="submit" value="Decode" /> 
+        	</form>		
+        </div>	
+    </div>
 </body>
 </html>
