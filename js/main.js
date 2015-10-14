@@ -67,7 +67,7 @@ $(document).ready(function() {
 				{
 					destIP[cntDestIP++] = arr_packet_data[i];
 				}
-				if (protocol == 11) {
+				if (protocol == 11 && i >= 34) { //UDP
 					if (i < 36) {
 						scrPort[cntScrPort++] = arr_packet_data[i];
 					}
@@ -80,8 +80,7 @@ $(document).ready(function() {
 					else if (i < 42) {
 						chksum[cntChksum++] = arr_packet_data[i];
 					}
-					else
-					{
+					else {
 						data[cntData++] = arr_packet_data[i];
 					}
 				}
