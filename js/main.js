@@ -94,8 +94,8 @@ $(document).ready(function() {
 			$("#result").append("Total Length : " + showDataFromArray(totalLngth) + "<br/>");
 			$("#result").append("Identification : " + showDataFromArray(identity) + "<br/>");
 			$("#result").append("Flag : " + showDataFromArray(flag) + "<br/>");
-			$("#result").append("TTL : " + showDataFromArray(ttl) + "<br/>");
-			$("#result").append("Protocol : " + showDataFromArray(protocol) + "<br/>");
+			$("#result").append("TTL : " + ttl + "<br/>");
+			$("#result").append("Protocol : " + protocol + "<br/>");
 			$("#result").append("Header Checksum : " + showDataFromArray(hdrChksum) + "<br/>");
 			$("#result").append("Source IP : " + showDataFromArray(scrIP) + "<br/>");
 			$("#result").append("Destination IP : " + showDataFromArray(destIP) + "<br/>");
