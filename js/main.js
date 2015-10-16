@@ -177,9 +177,22 @@ $(document).ready(function() {
 			$("#result").html('');
 			var packet_data = $('#packetData').val();
 			var arr_packet_data = packet_data.split(' ');
-			//GET DESTINATION MAC ADDRESS
 			var cntDestMAC = 0, cntScrMAC = 0, cntType = 0, cntTotalLngth = 0, cntIdentity = 0, cntFlag = 0, cntHdrChksum = 0, cntScrIP = 0, cntDestIP = 0, cntScrPort = 0, cntDestPort = 0, cntlngth = 0, cntChksum = 0, cntData = 0, cntSeqNmbr = 0, cntAckNmbr = 0, cntWndwSze = 0, cntChksumTCP = 0, cntUrgent = 0, cntOption = 0, cntHrdwreType = 0, cntPrtclType = 0, cntOpcdeRqst = 0, cntSndrMacAddrss = 0, cntSndrIpAddrss = 0, cntTrgtMacAddrss = 0, cntTrgtIpAddrss = 0;
 			var destMAC = [], scrMAC = [], type = [], hdrLngth, tos, totalLngth = [], identity = [], flag = [], ttl, protocol, hdrChksum = [], scrIP = [], destIP = [], scrPort = [], destPort = [], lngth = [], chksum = [], data = [], seqNmbr = [], ackNmbr = [], hr, flagTCP, wndwSze = [], chksumTCP = [], urgent = [], option = [], hrdwreType = [], prtclType = [], hrdwreSize, prtclSize, opcdeRqst = [], sndrMacAddrss = [], sndrIpAddrss = [], trgtMacAddrss = [], trgtIpAddrss = [];
+			var tmpResult = "<table class='table table-bordered'><thead><tr><th>#</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th></tr></thead><tbody>";
+			var numTrDivide = parseInt(arr_packet_data.length) / 16;
+			var numTrMod = parseInt(arr_packet_data.length) % 16;
+			var numTr = 16 - numTrMod;
+			if (numTrMod > 0) {
+				for (var i = (numTrDivide*16); i < ((numTrDivide*16) + numTr); i++) {
+					arr_packet_data[i] = "";
+				}
+			}
+			for (var i = 0, cnt = 1; i < arr_packet_data.length; i = i + 16, cnt++) {
+				tmpResult += "<tr><td>00" + (cnt*10) + "</td><td>" + arr_packet_data[i] + "</td><td>" + arr_packet_data[i+1] + "</td><td>" + arr_packet_data[i+2] + "</td><td>" + arr_packet_data[i+3] + "</td><td>" + arr_packet_data[i+4] + "</td><td>" + arr_packet_data[i+5] + "</td><td>" + arr_packet_data[i+6] + "</td><td>" + arr_packet_data[i+7] + "</td><td>" + arr_packet_data[i+8] + "</td><td>" + arr_packet_data[i+9] + "</td><td>" + arr_packet_data[i+10] + "</td><td>" + arr_packet_data[i+11] + "</td><td>" + arr_packet_data[i+12] + "</td><td>" + arr_packet_data[i+13] + "</td><td>" + arr_packet_data[i+14] + "</td><td>" + arr_packet_data[i+15] + "</td></tr>";	
+			}
+			tmpResult += "</tbody></table><br/>";
+			$("#result").append(tmpResult);
 			for (var i = 0; i < arr_packet_data.length; i++) {
 				if (arr_packet_data[13] == "00") { //UDP TCP ICMP IGMP
 					if (i < 6) { destMAC[cntDestMAC++] = arr_packet_data[i]; }
