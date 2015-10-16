@@ -308,7 +308,7 @@ $(document).ready(function() {
 				$("#result").append("Header Length : " + parseInt(hdrLngth[0]) * parseInt(hdrLngth[1]) + "<br/>");
 				$("#result").append("Type Of Service : " + tos + "<br/>");
 				$("#result").append("Total Length : " + hexTodec(totalLngth) + "<br/>");
-				$("#result").append("Identification : " + showDataFromArray(identity) + "<br/>");
+				$("#result").append("Identification : 0x" + identity[0]+identity[1] +" ("+ hexTodec(identity)+ ")<br/>");
 				$("#result").append("Flag : " + showDataFromArray(flag) + "<br/>");
 				$("#result").append("TTL : " + hexTodec(ttl) + "<br/>");
 				$("#result").append("Protocol : " + hexTodec(protocol) + "<br/>");
@@ -324,13 +324,13 @@ $(document).ready(function() {
 				else if (protocol == 06) {
 					$("#result").append("Source Port : " + hexTodec(scrPort) + "<br/>");
 					$("#result").append("Destination Port : " + hexTodec(destPort) + "<br/>");
-					$("#result").append("Sequence Number : " + showDataFromArray(seqNmbr) + "<br/>");
-					$("#result").append("Acknowledgement Number : " + showDataFromArray(ackNmbr) + "<br/>");
-					$("#result").append("Header Length : " + hexTodec(hr[0]) + "<br/>");
+					$("#result").append("Sequence Number : " + hexTodec(seqNmbr) + "<br/>");
+					$("#result").append("Acknowledgement Number : " + hexTodec(ackNmbr) + "<br/>");
+					$("#result").append("Header Length : " + (parseInt(hexTodec(hr[0]))*4) + "<br/>");
 					$("#result").append("Reserved : " + hexTobin(hr[1]).substring(0, 3) + "<br/>");
 					$("#result").append("Nonce : " + hexTobin(hr[1]).substring(3, 4) + "<br/>");
 					$("#result").append("Flag : 0x0" + flagTCP + showFlagTCP(flagTCP));
-					$("#result").append("Window Size : " + showDataFromArray(wndwSze) + "<br/>");
+					$("#result").append("Window Size : " + hexTodec(wndwSze) + "<br/>");
 					$("#result").append("Checksum : " + showDataFromArray(chksumTCP) + "<br/>");
 					$("#result").append("Urgent Pointer : " + showDataFromArray(urgent) + "<br/>");
 					$("#result").append("Option : " + showDataFromArray(option) + "<br/>");
