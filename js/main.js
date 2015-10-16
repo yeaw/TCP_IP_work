@@ -9,6 +9,11 @@ $(document).ready(function() {
 		return tmpText;
 	}
 
+	function binTodec(arr)
+	{
+		return parseInt(arr, 2).toString(10);
+	}
+
 	function hexTodec(arr)
 	{
 		var tmpShow = "";
@@ -131,6 +136,18 @@ $(document).ready(function() {
 		{			
 			if (tmpOpcdeReqID == "3") { tmpStr = "(3)Request Reverse"; }
 			else if (tmpOpcdeReqID == "4") { tmpStr = "(4)Reply Reverse"; }
+		}
+		return tmpStr;
+	}
+
+	function convertDataToIpAddress(arr)
+	{
+		var tmpBaseBin, tmpBaseDec, tmpStr = "";
+		for (var i = 0; i < arr.length; i++) {
+			tmpBaseBin = hexTobin(arr[i]);
+			tmpBaseDec = binTodec(tmpBaseBin);
+			tmpStr += tmpBaseDec;
+			if (i < (arr.length - 1)) { tmpStr += "."; }
 		}
 		return tmpStr;
 	}
@@ -296,8 +313,8 @@ $(document).ready(function() {
 				$("#result").append("TTL : " + hexTodec(ttl) + "<br/>");
 				$("#result").append("Protocol : " + hexTodec(protocol) + "<br/>");
 				$("#result").append("Header Checksum : " + showDataFromArray(hdrChksum) + "<br/>");
-				$("#result").append("Source IP : " + hexTodec(scrIP) + "<br/>");
-				$("#result").append("Destination IP : " + hexTodec(destIP) + "<br/>");
+				$("#result").append("Source IP : " + convertDataToIpAddress(scrIP) + "<br/>");
+				$("#result").append("Destination IP : " + convertDataToIpAddress(destIP) + "<br/>");
 				if (protocol == 11) {
 					$("#result").append("Source Port : " + hexTodec(scrPort) + "<br/>");
 					$("#result").append("Destination Port : " + hexTodec(destPort) + "<br/>");
@@ -341,9 +358,9 @@ $(document).ready(function() {
 				$("#result").append("Protocol Size : " + prtclSize + "<br/>");
 				$("#result").append("Opcode Request : " + opcodeRequest(arr_packet_data[13], opcdeRqst) + "<br/>");
 				$("#result").append("Sender MAC Address : " + showDataFromArray(sndrMacAddrss) + "<br/>");
-				$("#result").append("Sender IP Address : " + showDataFromArray(sndrIpAddrss) + "<br/>");
+				$("#result").append("Sender IP Address : " + convertDataToIpAddress(sndrIpAddrss) + "<br/>");
 				$("#result").append("Targus MAC Address : " + showDataFromArray(trgtMacAddrss) + "<br/>");
-				$("#result").append("Targus IP Address : " + showDataFromArray(trgtIpAddrss) + "<br/>");
+				$("#result").append("Targus IP Address : " + convertDataToIpAddress(trgtIpAddrss) + "<br/>");
 			}
 		});
 });
