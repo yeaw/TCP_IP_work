@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="style/style.css" />
     <link rel="stylesheet" type="text/css" href="style/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="style/bootstrap-theme.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <script type="text/javascript" language="javascript" charset="utf-8" src="js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" language="javascript" charset="utf-8" src="js/main.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -11,95 +12,238 @@
 <body>
 	<div class="container-fluid"> 
         <div class="row">
-                <div class="col-md-2 col-xs-2 martop">
-         
-                        
-                        <ul id="nav-tabs-wrapper" class="nav nav-tabs nav-pills nav-stacked well">
-                          <li class="active"><a href="#vtab1" data-toggle="tab">Tab 1</a></li>
-                          <li><a href="#vtab2" data-toggle="tab">Tab 2</a></li>
-                         
-                        </ul>
-                   
+            <div class="col-md-2 col-xs-12 col-sm-12 martop">            
+                <ul id="nav-tabs-wrapper" class="nav nav-tabs nav-pills nav-stacked well">
+                    <li class="active"><a href="#vtab1" data-toggle="tab">Decode</a></li>
+                    <li><a href="#vtab2" data-toggle="tab">Encode</a></li>
+                    <li><a href="#vtab3" data-toggle="tab">Tree test</a></li>        
+                </ul>      
             </div>
-
-
-            <div class="col-md-8 col-xs-10 well martop">
-
-             <div class="tab-content">
-                <div role="tabpanel" class="tab-pane fade in active" id="vtab1">
-            <h1 class="page-header" id="pg-h" style="margin: 1px ; border-bottom: 2px solid #E05353;">Packet Hexdump Decoder</h1> <br>
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div>
-                        Packet Example:
-                        <input type="radio" name="protocol" value="udp">UDP &nbsp;
-                        <input type="radio" name="protocol" value="tcp">TCP &nbsp;
-                        <input type="radio" name="protocol" value="icmp">ICMP &nbsp;
-                        <input type="radio" name="protocol" value="igmp">IGMP &nbsp;
-                        <input type="radio" name="protocol" value="arp">ARP &nbsp;
-                        <input type="radio" name="protocol" value="rarp">RARP &nbsp;
-                    </div>
-                    <br>
-                    <div>
-                        Enter your packet hexdump: <i style="color:#999;font-size:12px;">(e.g. A0 F2 01 00 8F 25 66 F1)</i><br>
-                        <textarea class="form-control" rows="5" id="packetData">00 24 8C 01 79 08 00 24 8C 01 79 06 08 00 45 20 00 3C 16 DB 00 00 3F 11 CC 8A D5 E9 AB 0A 5E B6 B8 8C 05 57 90 1F 90 30 93 71 75 F5 DB BA A0 12 16 28 EF E6 00 00 02 04 05 96 04 02 08 0A 59 70 9A 08 2D DE 7D 72 01 03 03 06</textarea><br/>
-                            <button id="submitBtn" class="btn btn-success col-md-12" >Decode</button>
-                    </div>	
-              </div><!--panel-body-->
-            </div><!--panel panel-default-->
-            </div>
-        
-                 <div id="pan" class="panel panel-default hide">
-                    <div class="panel-body">
-                        <div id="result">
-                        </div><!---->
-                    </div>
-                </div>
-
-
-
-             <div role="tabpanel" class="tab-pane fade" id="vtab2">
-                    <h3>Encode</h3>
-                    <p>xxx</p>
-                </div>
-            </div>
-
-            </div><!--col-md-8 col-xs-10 well martop-->
-
-            
-
-
-
-
-           <div class="col-xs-2 col-xs-12  martop">
-                    <div class="well">
-                        <div class="panel-body project-team">
-                        
-                            <div class="task-progress center-block text-center">
-                                  <h1 >Project Team </h1>  
+            <div class="col-md-8 col-xs-12 col-sm-12 martop">
+                <div class="row well" id="mar_lr">
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="vtab1">
+                        <h1 class="page-header" id="pg-h" style="margin: 1px ; border-bottom: 2px solid #E05353;">Packet Hexdump Decoder</h1> <br>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div>
+                                    Packet Example:
+                                    <input type="radio" name="protocol" value="udp">UDP &nbsp;
+                                    <input type="radio" name="protocol" value="tcp">TCP &nbsp;
+                                    <input type="radio" name="protocol" value="icmp">ICMP &nbsp;
+                                    <input type="radio" name="protocol" value="igmp">IGMP &nbsp;
+                                    <input type="radio" name="protocol" value="arp">ARP &nbsp;
+                                    <input type="radio" name="protocol" value="rarp">RARP &nbsp;
+                                </div>
+                                <br>
+                                <div>
+                                    Enter your packet hexdump: <i style="color:#999;font-size:12px;">(e.g. A0 F2 01 00 8F 25 66 F1)</i><br>
+                                    <textarea class="form-control" rows="5" id="packetData">00 24 8C 01 79 08 00 24 8C 01 79 06 08 00 45 20 00 3C 16 DB 00 00 3F 11 CC 8A D5 E9 AB 0A 5E B6 B8 8C 05 57 90 1F 90 30 93 71 75 F5 DB BA A0 12 16 28 EF E6 00 00 02 04 05 96 04 02 08 0A 59 70 9A 08 2D DE 7D 72 01 03 03 06</textarea><br/>
+                                        <button id="submitBtn" class="btn btn-success col-md-12" >Decode</button>
+                                </div>	
+                          </div><!--panel-body-->
+                        </div><!--panel panel-default-->
+                             <div id="pan" class="panel panel-default hide">
+                                <div class="panel-body">
+                                    <div id="result">
+                                    </div><!---->
+                                </div>
                             </div>
-                        </div>
+                    </div><!--tab1-->
+                    <div role="tabpanel" class="tab-pane fade" id="vtab2">
+                            <div class="panel-body">
+                                    <h3>Encode</h3>
+                                    xxx
+                                </div>
+                    </div>
+                            <div role="tabpanel" class="tab-pane fade" id="vtab3">
+                                <h3>Tree TCP test</h3>
+                                <div class="tree well">
+                                <ul>
+                                    <li>
+                                        <span><i class="fa fa-folder"></i> Packet Size</span>
+                                    </li>
+                                    <li>
+                                        <span><i class="fa fa-plus-square"></i> Ethernet II</span> 
+                                        <ul>
+                                            <li>
+                                                <span><i class="fa fa-minus"></i> Destination MAC</span>
+                                            </li>
+                                            <li>
+                                                <span><i class="fa fa-minus"></i> Source MAC</span>
+                                            </li>
+                                            <li>
+                                                <span><i class="fa fa-minus"></i> Type</span>
+                                            </li>
+                                        </ul>
+
+                                            <li>
+                                                <span><i class="fa fa-plus-square"></i> Internet Protocol Version 4</span>
+                                                <ul>
+                                                    <li>
+                                                        <span><i class="fa fa-minus"></i> Version</span>
+                                                    </li>
+                                                    <li>
+                                                        <span><i class="fa fa-minus"></i> Header Length </span>
+                                                    </li>
+                                                    <li>
+                                                        <span><i class="fa fa-minus"></i> Type Of Service </span>
+                                                    </li>
+                                                    <li>
+                                                        <span><i class="fa fa-minus"></i> Total Length </span>
+                                                    </li>
+                                                    <li>
+                                                        <span><i class="fa fa fa-minus"></i> Identification </span>
+                                                    </li>
+                                                    <li>
+                                                        <span><i class="fa fa-plus-square"></i> Flag</span>
+                                                        <ul>
+                                                                    <li>
+                                                                        <span><i class="fa fa-minus"></i> Reserved Bit</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <span><i class="fa fa-minus"></i> Don't fragment</span>
+                                                                    </li>
+                                                                     <li>
+                                                                        <span><i class="fa fa-minus"></i> More fragment</span>
+                                                                    </li>
+                                                                 </ul>
+
+                                                    </li>
+                                                    <li>
+                                                        <span><i class="fa fa fa-minus"></i> TTL</span>
+                                                    </li>
+                                                    <li>
+                                                        <span><i class="fa fa fa-minus"></i> Protocol</span>
+                                                    </li>
+                                                    <li>
+                                                        <span><i class="fa fa fa-minus"></i> Header Checksum</span>
+                                                    </li>
+                                                    <li>
+                                                        <span><i class="fa fa fa-minus"></i> Source IP</span>
+                                                    </li>
+                                                    <li>
+                                                        <span><i class="fa fa fa-minus"></i> Destination IP</span>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                                    <li>
+                                                        <span><i class="fa fa-plus-square"></i> Transmission Control Protocol</span>
+                                                        <ul>
+                                                            <li>
+                                                                <span><i class="fa fa fa-minus"></i> Source Port</span>
+                                                            </li>
+                                                            <li>
+                                                                <span><i class="fa fa fa-minus"></i> Destination Port</span>
+                                                            </li>
+                                                            <li>
+                                                                <span><i class="fa fa fa-minus"></i> Sequence Number</span>
+                                                            </li>
+                                                            <li>
+                                                                <span><i class="fa fa fa-minus"></i> Acknowledgement Number</span>
+                                                            </li>
+                                                            <li>
+                                                                <span><i class="fa fa fa-minus"></i> Header Length</span>
+                                                            </li>
+                                                        
+                                                            <li>
+                                                                <span><i class="fa fa-plus-square"></i> Flag</span>
+                                                                <ul>
+                                                                    <li>
+                                                                        <span><i class="fa fa-minus"></i> Reserved</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <span><i class="fa fa-minus"></i> Nonce</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <span><i class="fa fa-minus"></i> Congestion window Reduce (CWR)</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <span><i class="fa fa-minus"></i> ECN-Echo</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <span><i class="fa fa-minus"></i> Urgent</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <span><i class="fa fa-minus"></i> Acknowledgement</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <span><i class="fa fa-minus"></i> Push</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <span><i class="fa fa-minus"></i> Reset</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <span><i class="fa fa-minus"></i> Syn</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <span><i class="fa fa-minus"></i> Fin</span>
+                                                                    </li>
+                                                                 </ul>
+                                                            </li>
+                                                            <li>
+                                                                <span><i class="fa fa fa-minus"></i> Window Size</span>
+                                                            </li>
+                                                            <li>
+                                                                <span><i class="fa fa fa-minus"></i> Checksum</span>
+                                                            </li>
+                                                            <li>
+                                                                <span><i class="fa fa fa-minus"></i> Urgent Pointer</span>
+                                                            </li>
+                                                            <li>
+                                                                <span><i class="fa fa fa-minus"></i> Option</span>
+                                                            </li>
+                                                            <li>
+                                                                <span><i class="fa fa fa-minus"></i> Data</span>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+
+                            </div><!--tab2-->
+                </div>
+                </div>
+            </div><!--col-md-8 col-xs-10 well martop-->
+            <div class="col-md-2 col-xs-12 col-sm-12  martop">
+                <div class="row well" id="pad_lr">
+                
+                    <div class="col-md-12 col-xs-2 col-sm-2">
+                    <div class="panel-body project-team">                  
+                            <div class="task-progress center-block text-center">
+                                <h1 >Project Team </h1>  
+                            </div>
+                    </div>      
+                    </div> 
+                     <div class="col-md-12 col-xs-2 col-sm-2">       
                         <div class="simple avatar center-block" id="p_esso"></div>
-                        <div class="text-center">Sunantawat Phrommak</div>
-                        <div class="text-center bobot">Programmer</div>
-                          <div class="simple avatar center-block" id="d_art"></div>
+                            <div class="text-center">Sunantawat Phrommak</div>
+                                <div class="text-center bobot">Programmer</div>
+                    </div>
+                     <div class="col-md-12 col-xs-2 col-sm-2">    
+                        <div class="simple avatar center-block" id="d_art"></div>
                             <div class="text-center">Chaiwud Taitanee</div>
-                        <div class="text-center bobot">Designer</div>         
+                                <div class="text-center bobot">Designer</div> 
+                    </div>      
+                     <div class="col-md-12 col-xs-2 col-sm-2">      
                         <div class="simple avatar center-block" id="r_best"></div>
-                         <div class="text-center">Putipong Kongkaew</div>
-                        <div class="text-center bobot">Refferrer</div>
-                          <div class="simple avatar center-block" id="e_jimmy"></div>
-                           <div class="text-center">Sutthikeiat Bamrungthai</div>
-                        <div class="text-center">Error</div>
-                             
-                         </div>     
+                             <div class="text-center">Putipong Kongkaew</div>
+                                <div class="text-center bobot">Refferrer</div>
+                    </div>
+                    <div class="col-md-12 col-xs-2 col-sm-2">    
+                        <div class="simple avatar center-block" id="e_jimmy"></div>
+                            <div class="text-center">Sutthikeiat Bamrungthai</div>
+                                <div class="text-center bobot">Tester</div>    
+                    </div>
+              
+                </div>     
             </div>
-
-            </div><!--row-->
-         </div><!--container-->
-
-
+        </div><!--row-->
+    </div><!--container-->
 </body>
-   
-    
 </html>
