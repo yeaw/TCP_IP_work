@@ -9,11 +9,25 @@
     <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div class="container"> 
+	<div class="container-fluid"> 
         <div class="row">
-            <div class="col-md-8 col-md-offset-2 well martop">
-            <h1 class="page-header " id="pg-h">Packet Hexdump Decoder</h1> 
-            <h4>By Sutthikeiat Bamrungthai Putipong Kongkaew Sunantawat Phrommak Chaiwud Taitanee</h4>
+                <div class="col-md-2 col-xs-2 martop">
+         
+                        
+                        <ul id="nav-tabs-wrapper" class="nav nav-tabs nav-pills nav-stacked well">
+                          <li class="active"><a href="#vtab1" data-toggle="tab">Tab 1</a></li>
+                          <li><a href="#vtab2" data-toggle="tab">Tab 2</a></li>
+                         
+                        </ul>
+                   
+            </div>
+
+
+            <div class="col-md-8 col-xs-10 well martop">
+
+             <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="vtab1">
+            <h1 class="page-header" id="pg-h" style="margin: 1px ; border-bottom: 2px solid #E05353;">Packet Hexdump Decoder</h1> <br>
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div>
@@ -33,6 +47,7 @@
                     </div>	
               </div><!--panel-body-->
             </div><!--panel panel-default-->
+            </div>
         
                  <div id="pan" class="panel panel-default hide">
                     <div class="panel-body">
@@ -40,7 +55,46 @@
                         </div><!---->
                     </div>
                 </div>
+
+
+
+             <div role="tabpanel" class="tab-pane fade" id="vtab2">
+                    <h3>Encode</h3>
+                    <p>xxx</p>
+                </div>
             </div>
+
+            </div><!--col-md-8 col-xs-10 well martop-->
+
+            
+
+
+
+
+           <div class="col-xs-2 col-xs-12  martop">
+                    <div class="well">
+                        <div class="panel-body project-team">
+                        
+                            <div class="task-progress center-block text-center">
+                                  <h1 >Project Team </h1>  
+                            </div>
+                        </div>
+                        <div class="simple avatar center-block" id="p_esso"></div>
+                        <div class="text-center">Sunantawat Phrommak</div>
+                        <div class="text-center bobot">Programmer</div>
+                          <div class="simple avatar center-block" id="d_art"></div>
+                            <div class="text-center">Chaiwud Taitanee</div>
+                        <div class="text-center bobot">Designer</div>         
+                        <div class="simple avatar center-block" id="r_best"></div>
+                         <div class="text-center">Putipong Kongkaew</div>
+                        <div class="text-center bobot">Refferrer</div>
+                          <div class="simple avatar center-block" id="e_jimmy"></div>
+                           <div class="text-center">Sutthikeiat Bamrungthai</div>
+                        <div class="text-center">Error</div>
+                             
+                         </div>     
+            </div>
+
             </div><!--row-->
          </div><!--container-->
 
