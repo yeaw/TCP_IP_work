@@ -174,12 +174,13 @@ $(document).ready(function() {
 	    }); 
 
 		$('#submitBtn').click(function() {
+			$("#pan").removeClass('hide');
 			$("#result").html('');
 			var packet_data = $('#packetData').val();
 			var arr_packet_data = packet_data.split(' ');
 			var cntDestMAC = 0, cntScrMAC = 0, cntType = 0, cntTotalLngth = 0, cntIdentity = 0, cntFlag = 0, cntHdrChksum = 0, cntScrIP = 0, cntDestIP = 0, cntScrPort = 0, cntDestPort = 0, cntlngth = 0, cntChksum = 0, cntData = 0, cntSeqNmbr = 0, cntAckNmbr = 0, cntWndwSze = 0, cntChksumTCP = 0, cntUrgent = 0, cntOption = 0, cntHrdwreType = 0, cntPrtclType = 0, cntOpcdeRqst = 0, cntSndrMacAddrss = 0, cntSndrIpAddrss = 0, cntTrgtMacAddrss = 0, cntTrgtIpAddrss = 0;
 			var destMAC = [], scrMAC = [], type = [], hdrLngth, tos, totalLngth = [], identity = [], flag = [], ttl, protocol, hdrChksum = [], scrIP = [], destIP = [], scrPort = [], destPort = [], lngth = [], chksum = [], data = [], seqNmbr = [], ackNmbr = [], hr, flagTCP, wndwSze = [], chksumTCP = [], urgent = [], option = [], hrdwreType = [], prtclType = [], hrdwreSize, prtclSize, opcdeRqst = [], sndrMacAddrss = [], sndrIpAddrss = [], trgtMacAddrss = [], trgtIpAddrss = [];
-			var tmpResult = "<table class='table table-bordered'><thead><tr><th>#</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th></tr></thead><tbody>";
+			var tmpResult = "<table class='table table-bordered'><thead><tr><th>##</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th></tr></thead><tbody>";
 			var numTrDivide = parseInt(arr_packet_data.length) / 16;
 			var numTrMod = parseInt(arr_packet_data.length) % 16;
 			var numTr = 16 - numTrMod;
@@ -375,5 +376,7 @@ $(document).ready(function() {
 				$("#result").append("Targus MAC Address : " + showDataFromArray(trgtMacAddrss) + "<br/>");
 				$("#result").append("Targus IP Address : " + convertDataToIpAddress(trgtIpAddrss) + "<br/>");
 			}
+
+
 		});
 });
