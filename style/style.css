@@ -5,7 +5,7 @@ body {
 .martop
 {
 	margin-top: 3%;
-  box-shadow: 0 0 18px #ccc;
+ 
 }
 pg-h {
     margin: 4px 0 20px;
@@ -15,4 +15,98 @@ pg-h {
     padding-bottom: 9px;
     margin: 5px 0 20px;
     border-bottom: 2px solid #7E9EF7;
+}
+#p_esso{
+	    background-image: url("pic_profile/esso.jpg");
+}
+#d_art{
+	    background-image: url("pic_profile/art.jpg");
+}
+#r_best{
+	    background-image: url("pic_profile/best.jpg");
+}
+#e_jimmy{
+	    background-image: url("pic_profile/jimmy.jpg");
+}
+
+.avatar{
+	  background-size: cover;
+    border-radius: 100%;
+   margin: 2px ;
+    width: 7rem;
+    height: 7rem;
+}
+.bobot{
+	border-bottom: 1px solid #CCCCCC;
+	padding-bottom: 3px;
+    margin-bottom: 8px;
+
+}
+.task-progress h1, .task-progress h1 a {
+    color: #007AFF;
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+    font-weight: 300;
+    }
+
+
+    .nav-tabs-dropdown {
+  display: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.nav-tabs-dropdown:before {
+  content: "\e114";
+  font-family: 'Glyphicons Halflings';
+  position: absolute;
+  right: 30px;
+}
+
+@media screen and (min-width: 769px) {
+  #nav-tabs-wrapper {
+    display: block!important;
+  }
+}
+@media screen and (max-width: 768px) {
+    .nav-tabs-dropdown {
+        display: block;
+    }
+    #nav-tabs-wrapper {
+        display: none;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        text-align: center;
+    }
+   .nav-tabs-horizontal {
+        min-height: 20px;
+        padding: 19px;
+        margin-bottom: 20px;
+        background-color: #f5f5f5;
+        border: 1px solid #e3e3e3;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+   }
+    .nav-tabs-horizontal  > li {
+        float: none;
+    }
+    .nav-tabs-horizontal  > li + li {
+        margin-left: 2px;
+    }
+    .nav-tabs-horizontal > li,
+    .nav-tabs-horizontal > li > a {
+        background: transparent;
+        width: 100%;
+    } 
+    .nav-tabs-horizontal  > li > a {
+        border-radius: 4px;
+    }
+    .nav-tabs-horizontal  > li.active > a,
+    .nav-tabs-horizontal  > li.active > a:hover,
+    .nav-tabs-horizontal  > li.active > a:focus {
+        color: #ffffff;
+        background-color: #428bca;
+    }
 }

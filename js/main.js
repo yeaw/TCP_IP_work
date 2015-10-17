@@ -173,6 +173,18 @@ $(document).ready(function() {
 	            $('#packetData').val("00 24 8C 01 79 08 00 24 8C 01 79 06 08 35 00 0A 00 3C 16 DB 00 03 3F 11 CC 8A D5 E9 AB 0A 5E B6 B8 8C 05 57 90 1F 90 30 93 71 75 F5 DB BA A0 12 16 28 EF E6 00 00 02 04 05 96 04 02 08 0A 59 70 9A 08 2D DE 7D 72 01 03 03 06");
 	    }); 
 
+		$('.nav-tabs-dropdown').each(function(i, elm) { 
+    		$(elm).text($(elm).next('ul').find('li.active a').text());    
+		});  
+			$('.nav-tabs-dropdown').on('click', function(e) {
+   				 e.preventDefault();  
+    		$(e.target).toggleClass('open').next('ul').slideToggle();    
+		});
+		$('#nav-tabs-wrapper a[data-toggle="tab"]').on('click', function(e) {
+   			 e.preventDefault();
+    		$(e.target).closest('ul').hide().prev('a').removeClass('open').text($(this).text());
+      
+		});
 		$('#submitBtn').click(function() {
 			$("#pan").removeClass('hide');
 			$("#result").html('');
@@ -180,7 +192,7 @@ $(document).ready(function() {
 			var arr_packet_data = packet_data.split(' ');
 			var cntDestMAC = 0, cntScrMAC = 0, cntType = 0, cntTotalLngth = 0, cntIdentity = 0, cntFlag = 0, cntHdrChksum = 0, cntScrIP = 0, cntDestIP = 0, cntScrPort = 0, cntDestPort = 0, cntlngth = 0, cntChksum = 0, cntData = 0, cntSeqNmbr = 0, cntAckNmbr = 0, cntWndwSze = 0, cntChksumTCP = 0, cntUrgent = 0, cntOption = 0, cntHrdwreType = 0, cntPrtclType = 0, cntOpcdeRqst = 0, cntSndrMacAddrss = 0, cntSndrIpAddrss = 0, cntTrgtMacAddrss = 0, cntTrgtIpAddrss = 0;
 			var destMAC = [], scrMAC = [], type = [], hdrLngth, tos, totalLngth = [], identity = [], flag = [], ttl, protocol, hdrChksum = [], scrIP = [], destIP = [], scrPort = [], destPort = [], lngth = [], chksum = [], data = [], seqNmbr = [], ackNmbr = [], hr, flagTCP, wndwSze = [], chksumTCP = [], urgent = [], option = [], hrdwreType = [], prtclType = [], hrdwreSize, prtclSize, opcdeRqst = [], sndrMacAddrss = [], sndrIpAddrss = [], trgtMacAddrss = [], trgtIpAddrss = [];
-			var tmpResult = "<table class='table table-bordered'><thead><tr><th>##</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th></tr></thead><tbody>";
+			var tmpResult = "<div class='table-responsive'><table class='table table-bordered'><thead><tr><th>##</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th></tr></thead><tbody>";
 			var numTrDivide = parseInt(arr_packet_data.length) / 16;
 			var numTrMod = parseInt(arr_packet_data.length) % 16;
 			var numTr = 16 - numTrMod;
@@ -192,7 +204,7 @@ $(document).ready(function() {
 			for (var i = 0, cnt = 1; i < arr_packet_data.length; i = i + 16, cnt++) {
 				tmpResult += "<tr><td>00" + (cnt*10) + "</td><td>" + arr_packet_data[i] + "</td><td>" + arr_packet_data[i+1] + "</td><td>" + arr_packet_data[i+2] + "</td><td>" + arr_packet_data[i+3] + "</td><td>" + arr_packet_data[i+4] + "</td><td>" + arr_packet_data[i+5] + "</td><td>" + arr_packet_data[i+6] + "</td><td>" + arr_packet_data[i+7] + "</td><td>" + arr_packet_data[i+8] + "</td><td>" + arr_packet_data[i+9] + "</td><td>" + arr_packet_data[i+10] + "</td><td>" + arr_packet_data[i+11] + "</td><td>" + arr_packet_data[i+12] + "</td><td>" + arr_packet_data[i+13] + "</td><td>" + arr_packet_data[i+14] + "</td><td>" + arr_packet_data[i+15] + "</td></tr>";	
 			}
-			tmpResult += "</tbody></table><br/>";
+			tmpResult += "</tbody></table></div><br/>";
 			$("#result").append(tmpResult);
 			for (var i = 0; i < arr_packet_data.length; i++) {
 				if (arr_packet_data[13] == "00") { //UDP TCP ICMP IGMP
