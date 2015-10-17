@@ -47,24 +47,24 @@ $(document).ready(function() {
 		return tmpShow;
 	}
 
-	function showFlagTCP(arr)
+	function showFlagTCP(arr,rss,ncc)
 	{
 		var arrBin = hexTobin(arr);
 		var status = "", tmpStr = "", name = "";
 		for (var i = 0; i < arrBin.length; i++) {
 			if (arrBin[i] == '0') { status = "not set"; }
 			else { status = "set"; }
-			if (i < 1) { tmpStr += "Congestion window Reduce : "; if (arrBin[i] == '1') { if (name == "") { name = "CWR"; } else { name += "+CWR"; } } }
-			else if (i < 2) { tmpStr += "ECN-Echo : "; if (arrBin[i] == '1') { if (name == "") { name = "ECN"; } else { name += "+ECN"; } } }
-			else if (i < 3) { tmpStr += "Urgent : "; if (arrBin[i] == '1') { if (name == "") { name = "URG"; } else { name += "+URG"; } } }
-			else if (i < 4) { tmpStr += "Acknowledgement : "; if (arrBin[i] == '1') { if (name == "") { name = "ACK"; } else { name += "+ACK"; } } }
-			else if (i < 5) { tmpStr += "Push : "; if (arrBin[i] == '1') { if (name == "") { name = "PSH"; } else { name += "+PSH"; } } }
-			else if (i < 6) { tmpStr += "Reset : "; if (arrBin[i] == '1') { if (name == "") { name = "RST"; } else { name += "+RST"; } } }
-			else if (i < 7) { tmpStr += "Syn : "; if (arrBin[i] == '1') { if (name == "") { name = "SYN"; } else { name += "+SYN"; } } }
-			else if (i < 8) { tmpStr += "Fin : "; if (arrBin[i] == '1') { if (name == "") { name = "FIN"; } else { name += "+FIN"; } } }
+			if (i < 1) { tmpStr += "<strong>Congestion window Reduce</strong> : "; if (arrBin[i] == '1') { if (name == "") { name = "CWR"; } else { name += "+CWR"; } } }
+			else if (i < 2) { tmpStr += "<strong>ECN-Echo</strong> : "; if (arrBin[i] == '1') { if (name == "") { name = "ECN"; } else { name += "+ECN"; } } }
+			else if (i < 3) { tmpStr += "<strong>Urgent</strong> : "; if (arrBin[i] == '1') { if (name == "") { name = "URG"; } else { name += "+URG"; } } }
+			else if (i < 4) { tmpStr += "<strong>Acknowledgement</strong> : "; if (arrBin[i] == '1') { if (name == "") { name = "ACK"; } else { name += "+ACK"; } } }
+			else if (i < 5) { tmpStr += "<strong>Push</strong> : "; if (arrBin[i] == '1') { if (name == "") { name = "PSH"; } else { name += "+PSH"; } } }
+			else if (i < 6) { tmpStr += "<strong>Reset</strong> : "; if (arrBin[i] == '1') { if (name == "") { name = "RST"; } else { name += "+RST"; } } }
+			else if (i < 7) { tmpStr += "<strong>Syn</strong> : "; if (arrBin[i] == '1') { if (name == "") { name = "SYN"; } else { name += "+SYN"; } } }
+			else if (i < 8) { tmpStr += "<strong>Fin</strong> : "; if (arrBin[i] == '1') { if (name == "") { name = "FIN"; } else { name += "+FIN"; } } }
 			tmpStr += status + "(" + arrBin[i] + ")<br/>";
 		};
-		return "(" + name + ")<br/>" + tmpStr;
+		return "(" + name + ")<br/>"+" <strong>Reserved :</strong>"+rss+"<br/>" +"<strong>Nonce :</strong> "+ncc+"<br/>"  + tmpStr;
 	}
 
 	function typeICMP(val)
@@ -172,7 +172,7 @@ $(document).ready(function() {
 	        else 
 	            $('#packetData').val("00 24 8C 01 79 08 00 24 8C 01 79 06 08 35 00 0A 00 3C 16 DB 00 03 3F 11 CC 8A D5 E9 AB 0A 5E B6 B8 8C 05 57 90 1F 90 30 93 71 75 F5 DB BA A0 12 16 28 EF E6 00 00 02 04 05 96 04 02 08 0A 59 70 9A 08 2D DE 7D 72 01 03 03 06");
 	    }); 
-
+///////////////////////////////////////////////////////////////////////////////////
 		$('.nav-tabs-dropdown').each(function(i, elm) { 
     		$(elm).text($(elm).next('ul').find('li.active a').text());    
 		});  
@@ -180,11 +180,27 @@ $(document).ready(function() {
    				 e.preventDefault();  
     		$(e.target).toggleClass('open').next('ul').slideToggle();    
 		});
-		$('#nav-tabs-wrapper a[data-toggle="tab"]').on('click', function(e) {
-   			 e.preventDefault();
-    		$(e.target).closest('ul').hide().prev('a').removeClass('open').text($(this).text());
-      
-		});
+///////////////////////////////////////////////////////////////////////////////////
+$(function () {
+    $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Expand this branch');
+ 	$('li.parent_li > ul >li').hide('fast');;
+  
+
+    $('.tree li.parent_li > span').on('click', function (e) {
+        var children = $(this).parent('li.parent_li').find(' > ul > li');
+        
+        if (children.is(":visible")) {
+            children.hide('fast');
+            $(this).attr('title', 'Expand this branch').find(' > i').addClass('fa-plus-square').removeClass('fa-minus-square');
+        } else {
+            children.show('fast');
+            $(this).attr('title', 'Collapse this branch').find(' > i').addClass('fa-minus-square').removeClass('fa-plus-square');
+        }
+        e.stopPropagation();
+    });
+});
+
+///////////////////////////////////////////////////////////////////////////////////
 		$('#submitBtn').click(function() {
 			$("#pan").removeClass('hide');
 			$("#result").html('');
@@ -326,67 +342,69 @@ $(document).ready(function() {
 					}
 				}
 			};
-			$("#result").append("Packet Size : " + arr_packet_data.length + " byte<br/>Destination MAC : " + showDataFromArray(destMAC) + "<br/>");
-			$("#result").append("Source MAC : " + showDataFromArray(scrMAC) + "<br/>");
-			$("#result").append("Type : 0x" + type[0] + type[1] + "<br/>");
+			$("#result").append("<strong>Packet Size :</strong> " + arr_packet_data.length + " byte<br/><strong>Destination MAC :</strong> " + showDataFromArray(destMAC) + "<br/>");
+			$("#result").append("<strong>Source MAC :</strong> " + showDataFromArray(scrMAC) + "<br/>");
+			$("#result").append("<strong>Type :</strong> 0x" + type[0] + type[1] + "<br/>");
 			if (arr_packet_data[13] == "00") {
-				$("#result").append("Version : " + hdrLngth[0] + "<br/>");
-				$("#result").append("Header Length : " + parseInt(hdrLngth[0]) * parseInt(hdrLngth[1]) + "<br/>");
-				$("#result").append("Type Of Service : " + tos + "<br/>");
-				$("#result").append("Total Length : " + hexTodec(totalLngth) + "<br/>");
-				$("#result").append("Identification : 0x" + identity[0]+identity[1] +" ("+ hexTodec(identity)+ ")<br/>");
-				$("#result").append("Flag : " + showDataFromArray(flag) + "<br/>");
-				$("#result").append("TTL : " + hexTodec(ttl) + "<br/>");
-				$("#result").append("Protocol : " + hexTodec(protocol) + "<br/>");
-				$("#result").append("Header Checksum : " + showDataFromArray(hdrChksum) + "<br/>");
-				$("#result").append("Source IP : " + convertDataToIpAddress(scrIP) + "<br/>");
-				$("#result").append("Destination IP : " + convertDataToIpAddress(destIP) + "<br/>");
+				$("#result").append("<strong>Version : </strong>" + hdrLngth[0] + "<br/>");
+				$("#result").append("<strong>Header Length :</strong> " + parseInt(hdrLngth[0]) * parseInt(hdrLngth[1]) + "<br/>");
+				$("#result").append("<strong>Type Of Service :</strong> " + tos + "<br/>");
+				$("#result").append("<strong>Total Length :</strong> " + hexTodec(totalLngth) + "<br/>");
+				$("#result").append("<strong>Identification :</strong> 0x" + identity[0]+identity[1] +" ("+ hexTodec(identity)+ ")<br/>");
+				$("#result").append("<strong>Flag :</strong> " + showDataFromArray(flag) + "<br/>");
+				$("#result").append("<strong>TTL :</strong> " + hexTodec(ttl) + "<br/>");
+				$("#result").append("<strong>Protocol :</strong> " + hexTodec(protocol) + "<br/>");
+				$("#result").append("<strong>Header Checksum :</strong> " + showDataFromArray(hdrChksum) + "<br/>");
+				$("#result").append("<strong>Source IP :</strong> " + convertDataToIpAddress(scrIP) + "<br/>");
+				$("#result").append("<strong>Destination IP :</strong> " + convertDataToIpAddress(destIP) + "<br/>");
 				if (protocol == 11) {
-					$("#result").append("Source Port : " + hexTodec(scrPort) + "<br/>");
-					$("#result").append("Destination Port : " + hexTodec(destPort) + "<br/>");
-					$("#result").append("Length : " + hexTodec(lngth) + "<br/>");
-					$("#result").append("Checksum : " + showDataFromArray(chksum) + "<br/>");
+					$("#result").append("<strong>Source Port :</strong> " + hexTodec(scrPort) + "<br/>");
+					$("#result").append("<strong>Destination Port :</strong> " + hexTodec(destPort) + "<br/>");
+					$("#result").append("<strong>Length :</strong> " + hexTodec(lngth) + "<br/>");
+					$("#result").append("<strong>Checksum :</strong> " + showDataFromArray(chksum) + "<br/>");
 				}
 				else if (protocol == 06) {
-					$("#result").append("Source Port : " + hexTodec(scrPort) + "<br/>");
-					$("#result").append("Destination Port : " + hexTodec(destPort) + "<br/>");
-					$("#result").append("Sequence Number : " + hexTodec(seqNmbr) + "<br/>");
-					$("#result").append("Acknowledgement Number : " + hexTodec(ackNmbr) + "<br/>");
-					$("#result").append("Header Length : " + (parseInt(hexTodec(hr[0]))*4) + "<br/>");
-					$("#result").append("Reserved : " + hexTobin(hr[1]).substring(0, 3) + "<br/>");
-					$("#result").append("Nonce : " + hexTobin(hr[1]).substring(3, 4) + "<br/>");
-					$("#result").append("Flag : 0x0" + flagTCP + showFlagTCP(flagTCP));
-					$("#result").append("Window Size : " + hexTodec(wndwSze) + "<br/>");
-					$("#result").append("Checksum : " + showDataFromArray(chksumTCP) + "<br/>");
-					$("#result").append("Urgent Pointer : " + showDataFromArray(urgent) + "<br/>");
-					$("#result").append("Option : " + showDataFromArray(option) + "<br/>");
+					$("#result").append("<strong>Source Port :</strong> " + hexTodec(scrPort) + "<br/>");
+					$("#result").append("<strong>Destination Port :</strong> " + hexTodec(destPort) + "<br/>");
+					$("#result").append("<strong>Sequence Number :</strong> " + hexTodec(seqNmbr) + "<br/>");
+					$("#result").append("<strong>Acknowledgement Number :</strong> " + hexTodec(ackNmbr) + "<br/>");
+					$("#result").append("<strong>Header Length :</strong>" + (parseInt(hexTodec(hr[0]))*4) + "<br/>");
+					var rs = hexTobin(hr[1]).substring(0, 3);
+					var nc = hexTobin(hr[1]).substring(3, 4);
+					//$("#result").append("<strong>Reserved : " + hexTobin(hr[1]).substring(0, 3) + "<br/>");
+					//$("#result").append("<strong>Nonce :</strong> " + hexTobin(hr[1]).substring(3, 4) + "<br/>");
+					$("#result").append("<strong>Flag :</strong> 0x0" + flagTCP + showFlagTCP(flagTCP,rs,nc));
+					$("#result").append("<strong>Window Size : " + hexTodec(wndwSze) + "<br/>");
+					$("#result").append("<strong>Checksum :</strong> " + showDataFromArray(chksumTCP) + "<br/>");
+					$("#result").append("<strong>Urgent Pointer :</strong> " + showDataFromArray(urgent) + "<br/>");
+					$("#result").append("<strong>Option :</strong> " + showDataFromArray(option) + "<br/>");
 				}
 				else if (protocol == 01) {
-					$("#result").append("Type : " + typeICMP(hr) + "<br/>");
-					$("#result").append("Code : " + flagTCP + "<br/>");
-					$("#result").append("Checksum : " + showDataFromArray(chksumTCP) + "<br/>");
-					$("#result").append("Identifier : " + showDataFromArray(urgent) + "<br/>");
-					$("#result").append("Sequence Number : " + showDataFromArray(seqNmbr) + "<br/>");
+					$("#result").append("<strong>Type :</strong> " + typeICMP(hr) + "<br/>");
+					$("#result").append("<strong>Code :</strong> " + flagTCP + "<br/>");
+					$("#result").append("<strong>Checksum :</strong> " + showDataFromArray(chksumTCP) + "<br/>");
+					$("#result").append("<strong>Identifier :</strong> " + showDataFromArray(urgent) + "<br/>");
+					$("#result").append("<strong>Sequence Number :</strong> " + showDataFromArray(seqNmbr) + "<br/>");
 				}
 				else if (protocol == 02) {
-					$("#result").append("Type : " + typeIGMP(hr) + "<br/>");
-					$("#result").append("Max Response Time : " + flagTCP + "<br/>");
-					$("#result").append("IGMP Checksum : " + showDataFromArray(chksumTCP) + "<br/>");
-					$("#result").append("Group Address : " + showDataFromArray(urgent) + "<br/>");
+					$("#result").append("<strong>Type :</strong> " + typeIGMP(hr) + "<br/>");
+					$("#result").append("<strong>Max Response Time :</strong> " + flagTCP + "<br/>");
+					$("#result").append("<strong>IGMP Checksum :</strong> " + showDataFromArray(chksumTCP) + "<br/>");
+					$("#result").append("<strong>Group Address :</strong> " + showDataFromArray(urgent) + "<br/>");
 				}
-				$("#result").append("Data : " + showDataFromArray(data) + "<br/>");
+				$("#result").append("<strong>Data : </strong>" + showDataFromArray(data) + "<br/>");
 			}
 			else
 			{
-				$("#result").append("Hardware Type : " + hardwareType(arr_packet_data[13], hrdwreType) + "<br/>");
-				$("#result").append("Protocol Type : 0x" + prtclType[0] + prtclType[1] + "<br/>");
-				$("#result").append("Hardware Size : " + hrdwreSize + "<br/>");
-				$("#result").append("Protocol Size : " + prtclSize + "<br/>");
-				$("#result").append("Opcode Request : " + opcodeRequest(arr_packet_data[13], opcdeRqst) + "<br/>");
-				$("#result").append("Sender MAC Address : " + showDataFromArray(sndrMacAddrss) + "<br/>");
-				$("#result").append("Sender IP Address : " + convertDataToIpAddress(sndrIpAddrss) + "<br/>");
-				$("#result").append("Targus MAC Address : " + showDataFromArray(trgtMacAddrss) + "<br/>");
-				$("#result").append("Targus IP Address : " + convertDataToIpAddress(trgtIpAddrss) + "<br/>");
+				$("#result").append("<strong>Hardware Type</strong> : " + hardwareType(arr_packet_data[13], hrdwreType) + "<br/>");
+				$("#result").append("<strong>Protocol Type</strong> : 0x" + prtclType[0] + prtclType[1] + "<br/>");
+				$("#result").append("<strong>Hardware Size</strong> : " + hrdwreSize + "<br/>");
+				$("#result").append("<strong>Protocol Size</strong> : " + prtclSize + "<br/>");
+				$("#result").append("<strong>Opcode Request</strong> : " + opcodeRequest(arr_packet_data[13], opcdeRqst) + "<br/>");
+				$("#result").append("<strong>Sender MAC Address</strong> : " + showDataFromArray(sndrMacAddrss) + "<br/>");
+				$("#result").append("<strong>Sender IP Address </strong> : " + convertDataToIpAddress(sndrIpAddrss) + "<br/>");
+				$("#result").append("<strong>Targus MAC Address</strong> : " + showDataFromArray(trgtMacAddrss) + "<br/>");
+				$("#result").append("<strong>Targus IP Address</strong> : " + convertDataToIpAddress(trgtIpAddrss) + "<br/>");
 			}
 
 
