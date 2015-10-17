@@ -1,1 +1,18 @@
-
+body {
+  background: url('http://i.imgur.com/1WSTW9k.png');
+  color: #f1f1f1;
+}
+.martop
+{
+	margin-top: 3%;
+  box-shadow: 0 0 18px #ccc;
+}
+pg-h {
+    margin: 4px 0 20px;
+    border-bottom: 1px solid #DA5050;
+}
+.page-header {
+    padding-bottom: 9px;
+    margin: 5px 0 20px;
+    border-bottom: 2px solid #7E9EF7;
+}

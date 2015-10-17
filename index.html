@@ -11,33 +11,36 @@
 <body>
 	<div class="container"> 
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-            <h1 class="page-header">Packet Hexdump Decoder</h1> 
+            <div class="col-md-8 col-md-offset-2 well martop">
+            <h1 class="page-header " id="pg-h">Packet Hexdump Decoder</h1> 
             <h4>By Sutthikeiat Bamrungthai Putipong Kongkaew Sunantawat Phrommak Chaiwud Taitanee</h4>
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div>
-                        <input type="radio" name="protocol" value="udp">UDP
-                        <input type="radio" name="protocol" value="tcp">TCP
-                        <input type="radio" name="protocol" value="icmp">ICMP
-                        <input type="radio" name="protocol" value="igmp">IGMP
-                        <input type="radio" name="protocol" value="arp">ARP
-                        <input type="radio" name="protocol" value="rarp">RARP
+                        Packet Example:
+                        <input type="radio" name="protocol" value="udp">UDP &nbsp;
+                        <input type="radio" name="protocol" value="tcp">TCP &nbsp;
+                        <input type="radio" name="protocol" value="icmp">ICMP &nbsp;
+                        <input type="radio" name="protocol" value="igmp">IGMP &nbsp;
+                        <input type="radio" name="protocol" value="arp">ARP &nbsp;
+                        <input type="radio" name="protocol" value="rarp">RARP &nbsp;
                     </div>
                     <br>
                     <div>
                         Enter your packet hexdump: <i style="color:#999;font-size:12px;">(e.g. A0 F2 01 00 8F 25 66 F1)</i><br>
-                        <textarea class="form-control" rows="3" id="packetData">00 24 8C 01 79 08 00 24 8C 01 79 06 08 00 45 20 00 3C 16 DB 00 00 3F 11 CC 8A D5 E9 AB 0A 5E B6 B8 8C 05 57 90 1F 90 30 93 71 75 F5 DB BA A0 12 16 28 EF E6 00 00 02 04 05 96 04 02 08 0A 59 70 9A 08 2D DE 7D 72 01 03 03 06</textarea><br/>
-                        <button id="submitBtn" class="btn btn-success" >Decode</button>
+                        <textarea class="form-control" rows="5" id="packetData">00 24 8C 01 79 08 00 24 8C 01 79 06 08 00 45 20 00 3C 16 DB 00 00 3F 11 CC 8A D5 E9 AB 0A 5E B6 B8 8C 05 57 90 1F 90 30 93 71 75 F5 DB BA A0 12 16 28 EF E6 00 00 02 04 05 96 04 02 08 0A 59 70 9A 08 2D DE 7D 72 01 03 03 06</textarea><br/>
+                            <button id="submitBtn" class="btn btn-success col-md-12" >Decode</button>
                     </div>	
               </div><!--panel-body-->
             </div><!--panel panel-default-->
-
-
-                <div id="result">
-                </div><!---->
-
+        
+                 <div id="pan" class="panel panel-default hide">
+                    <div class="panel-body">
+                        <div id="result">
+                        </div><!---->
+                    </div>
                 </div>
+            </div>
             </div><!--row-->
          </div><!--container-->
 
