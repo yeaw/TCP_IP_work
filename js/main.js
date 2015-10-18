@@ -373,7 +373,7 @@ $(function () {
 					}
 				}
 			};
-			$("#result").append("<strong>Packet Size :</strong> " + arr_packet_data.length + " byte <hr> <h4><u>Ethernet II</u></h4><strong>Destination MAC :</strong> " + showDataToMAC(destMAC) + "<br/>");
+			$("#result").append("<strong>Packet Size :</strong> " + (arr_packet_data.length - numTr) + " byte <hr> <h4><u>Ethernet II</u></h4><strong>Destination MAC :</strong> " + showDataToMAC(destMAC) + "<br/>");
 			$("#result").append("<strong>Source MAC :</strong> " + showDataToMAC(scrMAC) + "<br/>");
 			$("#result").append("<strong>Type :</strong> 0x" + type[0] + type[1] + "<hr>");
 			if (arr_packet_data[13] == "00") {
