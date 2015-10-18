@@ -28,6 +28,23 @@ $(document).ready(function() {
 		return parseInt(arr, 2).toString(10);
 	}
 
+function checkprotocol(arr)
+	{
+		var prot = "";
+		if(arr == 1){
+			prot = "(ICMP)";
+		}else if(arr == 2){
+			prot = "(IGMP)";
+		}else if(arr == 17){
+			prot = "(UDP)";
+		}else if(arr == 06){
+			prot = "(TCP)";
+		}
+
+		return prot;
+	}
+
+
 	function hexTodec(arr)
 	{
 		var tmpShow = "";
@@ -360,25 +377,25 @@ $(function () {
 			$("#result").append("<strong>Source MAC :</strong> " + showDataToMAC(scrMAC) + "<br/>");
 			$("#result").append("<strong>Type :</strong> 0x" + type[0] + type[1] + "<hr>");
 			if (arr_packet_data[13] == "00") {
-				$("#result").append("<h4><u>Internet Protocol Version 4</u></h4> <strong>Version : </strong>" + hdrLngth[0] + "<br/>");
+				$("#result").append("<h4><u>Internet Protocol Version 4 (IPv4)</u></h4> <strong>Version : </strong>" + hdrLngth[0] + "<br/>");
 				$("#result").append("<strong>Header Length :</strong> " + parseInt(hdrLngth[0]) * parseInt(hdrLngth[1]) + "<br/>");
 				$("#result").append("<strong>Type Of Service :</strong> " + tos + "<br/>");
 				$("#result").append("<strong>Total Length :</strong> " + hexTodec(totalLngth) + "<br/>");
 				$("#result").append("<strong>Identification :</strong> 0x" + identity[0]+identity[1] +" ("+ hexTodec(identity)+ ")<br/>");
 				$("#result").append("<strong>Flag :</strong> " + showDataFromArray(flag) + "<br/>");
 				$("#result").append("<strong>TTL :</strong> " + hexTodec(ttl) + "<br/>");
-				$("#result").append("<strong>Protocol :</strong> " + hexTodec(protocol) + "<br/>");
+				$("#result").append("<strong>Protocol :</strong> " + hexTodec(protocol) +" "+ checkprotocol(hexTodec(protocol))+ "<br/>");
 				$("#result").append("<strong>Header Checksum :</strong> " + showDataFromArray(hdrChksum) + "<br/>");
 				$("#result").append("<strong>Source IP :</strong> " + convertDataToIpAddress(scrIP) + "<br/>");
 				$("#result").append("<strong>Destination IP :</strong> " + convertDataToIpAddress(destIP) + "<hr>");
 				if (protocol == 11) {
-					$("#result").append("<h4><u>User Datagram Protocol</u></h4><strong>Source Port :</strong> " + hexTodec(scrPort) + "<br/>");
+					$("#result").append("<h4><u>User Datagram Protocol (UDP)</u></h4><strong>Source Port :</strong> " + hexTodec(scrPort) + "<br/>");
 					$("#result").append("<strong>Destination Port :</strong> " + hexTodec(destPort) + "<br/>");
 					$("#result").append("<strong>Length :</strong> " + hexTodec(lngth) + "<br/>");
 					$("#result").append("<strong>Checksum :</strong> " + showDataFromArray(chksum) + "<br/>");
 				}
 				else if (protocol == 06) {
-					$("#result").append("<h4><u>Transmission Control Protocol</u></h4><strong>Source Port :</strong> " + hexTodec(scrPort) + "<br/>");
+					$("#result").append("<h4><u>Transmission Control Protocol (TCP)</u></h4><strong>Source Port :</strong> " + hexTodec(scrPort) + "<br/>");
 					$("#result").append("<strong>Destination Port :</strong> " + hexTodec(destPort) + "<br/>");
 					$("#result").append("<strong>Sequence Number :</strong> " + hexTodec(seqNmbr) + "<br/>");
 					$("#result").append("<strong>Acknowledgement Number :</strong> " + hexTodec(ackNmbr) + "<br/>");
@@ -394,14 +411,14 @@ $(function () {
 					$("#result").append("<strong>Option :</strong> " + showDataFromArray(option) + "<br/>");
 				}
 				else if (protocol == 01) {
-					$("#result").append("<h4><u>Internet Control Message Protocol </u></h4><strong>Type :</strong> " + typeICMP(hr) + "<br/>");
+					$("#result").append("<h4><u>Internet Control Message Protocol (ICMP)</u></h4><strong>Type :</strong> " + typeICMP(hr) + "<br/>");
 					$("#result").append("<strong>Code :</strong> " + flagTCP + "<br/>");
 					$("#result").append("<strong>Checksum :</strong> " + showDataFromArray(chksumTCP) + "<br/>");
 					$("#result").append("<strong>Identifier :</strong> " + showDataFromArray(urgent) + "<br/>");
 					$("#result").append("<strong>Sequence Number :</strong> " + showDataFromArray(seqNmbr) + "<br/>");
 				}
 				else if (protocol == 02) { 
-					$("#result").append("<h4><u>Internet Group Management Protocol</u></h4><strong>Type :</strong> " + typeIGMP(hr) + "<br/>");
+					$("#result").append("<h4><u>Internet Group Management Protocol (IGMP)</u></h4><strong>Type :</strong> " + typeIGMP(hr) + "<br/>");
 					$("#result").append("<strong>Max Response Time :</strong> " + flagTCP + "<br/>");
 					$("#result").append("<strong>IGMP Checksum :</strong> " + showDataFromArray(chksumTCP) + "<br/>");
 					$("#result").append("<strong>Group Address :</strong> " + showDataFromArray(urgent) + "<br/>");
@@ -413,10 +430,10 @@ $(function () {
 				var ttype = type[0] + type[1] ;
 				if(ttype == "0806")
 				{
-					$("#result").append("<h4><u>Address Resolution Protocol </u></h4>");
+					$("#result").append("<h4><u>Address Resolution Protocol (ARP)</u></h4>");
 				}else if (ttype == "0835")
 				{
-					$("#result").append("<h4><u>Reverse Address Resolution Protocol</u></h4>");
+					$("#result").append("<h4><u>Reverse Address Resolution Protocol (RARP)</u></h4>");
 				}
 
 				$("#result").append("<strong>Hardware Type</strong> : " + hardwareType(arr_packet_data[13], hrdwreType) + "<br/>");
